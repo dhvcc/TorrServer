@@ -1,8 +1,9 @@
 name: ci
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - fork-deploy
 
 jobs:
   docker:
