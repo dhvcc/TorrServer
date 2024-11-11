@@ -57,11 +57,11 @@ func (t *Torrent) Stream(fileID int, req *http.Request, resp http.ResponseWriter
 	torrDir := sets.DownloadDir
 	localFilePath := filepath.Join(torrDir, file.Path())
 
+	log.Printf("Local file path: %s\n", localFilePath)
+
 	if _, err := os.Stat(localFilePath); err == nil {
 		// File exists, serve it directly
-		if sets.BTsets.EnableDebug {
-			log.Printf("Serving local file: %s\n", localFilePath)
-		}
+		log.Printf("Serving local file: %s\n", localFilePath)
 
 		// Set appropriate headers
 		resp.Header().Set("Connection", "close")
@@ -87,6 +87,7 @@ func (t *Torrent) Stream(fileID int, req *http.Request, resp http.ResponseWriter
 	}
 
 	// If the file doesn't exist locally, continue with the existing torrent streaming logic
+	log.Printf("Serving torrent file: %s\n", file.Path())
 	reader := t.NewReader(file)
 	if sets.BTsets.ResponsiveMode {
 		reader.SetResponsive()
