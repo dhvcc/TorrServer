@@ -48,7 +48,9 @@ fi
 mkdir -p /config/data/nova3/engines
 if [ -f /config/data/nova3/engines/jackett.py ]; then
   echo "======= Jackett plugin EXISTS   =========="
-  rm /tmp/jackett.patch.py
+  # if [ -f /tmp/jackett.patch.py ]; then
+  #   rm /tmp/jackett.patch.py
+  # fi
 else
   echo "======= Jackett plugin INSERTED =========="
   mv /tmp/jackett.patch.py /config/data/nova3/engines/jackett.py
@@ -56,8 +58,9 @@ fi
 mkdir -p /config/config
 if [ -f /config/config/qBittorrent.conf ]; then
   echo "======= Config EXISTS   =========="
-  mv /tmp/qBittorrent.patch.conf /config/config/qBittorrent.conf
-  #rm /tmp/qBittorrent.patch.conf
+  # if [ -f /tmp/qBittorrent.patch.conf ]; then
+  #   rm /tmp/qBittorrent.patch.conf
+  # fi
 else
   echo "======= Config INSERTED =========="
   mv /tmp/qBittorrent.patch.conf /config/config/qBittorrent.conf

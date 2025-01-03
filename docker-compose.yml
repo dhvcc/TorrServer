@@ -1,6 +1,6 @@
 services:
   torrserver:
-    image: ghcr.io/dhvcc/torrserver
+    image: ghcr.io/dhvcc/torrserver:latest
     restart: unless-stopped
     # Or build locally:
     # build:
@@ -40,6 +40,23 @@ services:
     volumes:
       - qbittorrent-config:/config
       - qbittorrent-data:/app/qBittorrent/downloads
+
+  cors_anywhere:
+    container_name: cors-anywhere
+    build:
+      dockerfile: cors-anywhere.patch.Dockerfile
+      context: .
+    ports:
+      - 5667:5667
+    environment:
+      - PORT=5667
+
+
+  lampa:
+    container_name: lampa
+    image: ghcr.io/dhvcc/lampa:latest
+    ports:
+      - 80:3000
 
 volumes:
   torrserver-cache:
