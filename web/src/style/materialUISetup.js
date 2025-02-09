@@ -26,11 +26,11 @@ export const lightTheme = createTheme({
 
 export const useMaterialUITheme = () => {
   // PATCH START Use auto mode by default
-  const savedThemeMode = localStorage.getItem('themeMode') || THEME_MODES.AUTO
+  const savedThemeMode = localStorage.getItem('themeMode')
   // PATCH END
   const isSystemModeDark = useMediaQuery('(prefers-color-scheme: dark)')
   const [isDarkMode, setIsDarkMode] = useState(savedThemeMode === 'dark' || isSystemModeDark)
-  const [currentThemeMode, setCurrentThemeMode] = useState(savedThemeMode || THEME_MODES.LIGHT)
+  const [currentThemeMode, setCurrentThemeMode] = useState(savedThemeMode || THEME_MODES.AUTO)
 
   const updateThemeMode = mode => {
     setCurrentThemeMode(mode)
