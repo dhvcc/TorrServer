@@ -27,25 +27,4 @@ fi
 
 echo "Running with: ${FLAGS}"
 
-# PATCH START Generate random credentials if none exist
-if [ ! -f "$TS_CONF_PATH/accs.db" ]; then
-  # Generate random credentials
-  USERNAME="admin"
-  # Generate random 16 character password using /dev/urandom
-  PASSWORD=$(head -c 12 /dev/urandom | base64 | head -c 16)
-
-  # Create torrserver credentials file
-  cat > $TS_CONF_PATH/accs.db << EOF
-  {
-      "${USERNAME}": "${PASSWORD}"
-  }
-EOF
-  echo "******** Information ********"
-  echo "TorrServer credetials were auto generated"
-  echo "TorrServer administrator username is: ${USERNAME}"
-  echo "TorrServer administrator password is: ${PASSWORD}"
-  echo "The credentials have been saved to ${TS_CONF_PATH}/accs.db"
-fi
-# PATCH END
-
 torrserver $FLAGS
